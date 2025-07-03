@@ -1,0 +1,132 @@
+/* বেসিক স্টাইল, থিম এবং ডাইনামিক ব্যাকগ্রাউন্ড */
+:root {
+  /* ডার্ক থিম ভ্যারিয়েবল */
+  --bg-color: #121212;
+  --container-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --box-bg: #2a2a2a;
+  --border-color: #444;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --primary-accent: #4CAF50;
+  --secondary-accent: #009688;
+  --icon-color: #aaa;
+}
+
+body.light-theme {
+  /* লাইট থিম ভ্যারিয়েবল */
+  --bg-color: #f0f2f5;
+  --container-bg: #ffffff;
+  --text-color: #333333;
+  --box-bg: #f9f9f9;
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --primary-accent: #1e88e5;
+  --secondary-accent: #00acc1;
+  --icon-color: #555;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  flex-direction: column;
+  padding: 20px 0;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+/* ডাইনামিক ব্যাকগ্রাউন্ড গ্লো */
+body.status-bg-severe { background: radial-gradient(ellipse at center, var(--bg-color) 60%, #5d1a14); }
+body.status-bg-critical { background: radial-gradient(ellipse at center, var(--bg-color) 60%, #683d00); }
+body.status-bg-attention { background: radial-gradient(ellipse at center, var(--bg-color) 60%, #644d00); }
+body.status-bg-good { background: radial-gradient(ellipse at center, var(--bg-color) 60%, #3a501e); }
+body.status-bg-clean { background: radial-gradient(ellipse at center, var(--bg-color) 60%, #1d441f); }
+
+
+.container {
+  width: 90%;
+  max-width: 400px;
+  background-color: var(--container-bg);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  text-align: center;
+  transition: background-color 0.5s;
+}
+
+.hidden { display: none !important; }
+
+/* হেডার এবং থিম টগলার */
+.header-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.title { color: var(--primary-accent); margin: 0; flex-grow: 1; text-align: center; padding-left: 30px;}
+#theme-toggle-button {
+    background: none; border: none; font-size: 1.5em; cursor: pointer; color: var(--text-color);
+    width: 30px;
+}
+
+/* সিস্টেম স্ট্যাটাস বক্স */
+.system-status-box { background-color: var(--box-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 15px; margin-bottom: 25px; text-align: left; }
+.status-title { font-size: 1.1em; font-weight: bold; margin: 0 0 15px 0; text-align: center; }
+.system-status-box ul { list-style-type: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.system-status-box li { display: flex; align-items: center; font-size: 1em; }
+.system-status-box i { width: 25px; text-align: center; margin-right: 10px; color: var(--icon-color); }
+.status-value { margin-left: auto; font-weight: bold; }
+
+/* স্ট্যাটাসের বিভিন্ন রঙ */
+.status-severe { color: #f44336; }
+.status-critical { color: #ff9800; }
+.status-attention { color: #ffc107; }
+.status-good { color: #8bc34a; }
+.status-clean { color: var(--primary-accent); }
+
+/* বাটন */
+.options { display: flex; flex-direction: column; gap: 15px; }
+.main-button { background-color: #333; color: #fff; border: none; padding: 15px; border-radius: 10px; font-size: 1em; cursor: pointer; transition: background-color 0.3s, transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.main-button:hover { background-color: var(--primary-accent); transform: scale(1.05); }
+body.light-theme .main-button { background-color: #e0e0e0; color: #333; }
+body.light-theme .main-button:hover { background-color: var(--primary-accent); color: #fff; }
+
+/* ক্লিনিং অ্যানিমেশন */
+.animation-icon { font-size: 4em; color: var(--primary-accent); margin-bottom: 10px; }
+#junk-animation i { animation: sweep 1.5s infinite; }
+#ram-animation i { animation: rocket-boost 2s infinite ease-in-out; }
+#battery-animation i { animation: battery-charge 2.5s infinite steps(4, end); }
+#cpu-animation i { animation: fan-spin 1s infinite linear; }
+
+@keyframes sweep { 0%, 100% { transform: rotate(-30deg) scale(1); } 50% { transform: rotate(30deg) scale(1.1); } }
+@keyframes rocket-boost { 0% { transform: translateY(10px); opacity: 0.8; } 50% { transform: translateY(-10px) scale(1.1); opacity: 1; } 100% { transform: translateY(10px); opacity: 0.8; } }
+@keyframes battery-charge { 0% { color: #f44336; } 25% { color: #ff9800; } 50% { color: #ffc107; } 75% { color: #8bc34a; } 100% { color: var(--primary-accent); } }
+@keyframes fan-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+#cleaning-status { margin-top: 20px; font-size: 1.2em; }
+.progress-bar-container { width: 100%; background-color: var(--border-color); border-radius: 5px; margin: 20px 0; }
+#progress-bar { width: 0%; height: 10px; background-color: var(--primary-accent); border-radius: 5px; transition: width 0.2s linear; }
+.scan-log-container { height: 120px; background-color: #000; border: 1px solid #444; border-radius: 5px; overflow-y: scroll; text-align: left; padding: 10px; margin-top: 20px; }
+#scan-log { font-family: 'Courier New', Courier, monospace; font-size: 0.8em; color: #0f0; margin: 0; white-space: pre-wrap; word-wrap: break-word; }
+
+/* ফলাফল এবং অলরেডি ক্লিনড স্ক্রিন */
+.success-icon, .shield-icon { font-size: 5em; }
+.success-icon { color: var(--primary-accent); }
+.shield-icon { color: var(--secondary-accent); }
+#result-title, #already-clean-title { margin-bottom: 10px; }
+#result-stats, #already-clean-message { font-size: 1.1em; }
+#junk-report-details { text-align: left; margin: 15px auto; padding: 15px; background-color: var(--box-bg); border-radius: 8px; max-width: 80%; }
+#junk-report-details ul { list-style-type: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+#junk-report-details li { display: flex; justify-content: space-between; }
+.back-button { background-color: var(--primary-accent); color: #fff; border: none; padding: 10px 30px; border-radius: 8px; margin-top: 20px; cursor: pointer; transition: background-color 0.3s; }
+.back-button:hover { background-color: #45a049; }
+body.light-theme .back-button:hover { background-color: #1579d4; }
+
+/* ক্রেডিট ফুটার */
+#credit-footer { margin-top: 25px; color: #888; font-size: 1em; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+body.light-theme #credit-footer { color: #555; }
+.social-icons { display: flex; gap: 25px; }
+.social-icons a { color: #888; text-decoration: none; font-size: 1.8em; transition: all 0.3s ease; }
+body.light-theme .social-icons a { color: #555; }
+.social-icons a[href*="facebook.com"]:hover { color: #1877F2; transform: translateY(-5px) scale(1.2); }
+.social-icons a[href*="t.me"]:hover { color: #2AABEE; transform: translateY(-5px) scale(1.2); }
+.social-icons a[href*="wa.me"]:hover { color: #25D366; transform: translateY(-5px) scale(1.2); }

@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Optimizer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- আইকনের জন্য Font Awesome লাইব্রেরি -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- প্রাথমিক স্ক্রিন -->
+        <div id="initial-view">
+            <div class="header-controls">
+                <h1 class="title">Phone Optimizer</h1>
+                <button id="theme-toggle-button" aria-label="Toggle Theme" title="Change Theme">
+                    <i class="fas fa-sun"></i> <!-- ডিফল্টরূপে সূর্য, জাভাস্ক্রিপ্ট দিয়ে পরিবর্তন হবে -->
+                </button>
+            </div>
+
+            <div class="system-status-box">
+                <p class="status-title">System Status: <span id="overall-status">Analyzing...</span></p>
+                <ul>
+                    <li>
+                        <i class="fas fa-trash-alt"></i> Junk Files:
+                        <span id="junk-status" class="status-value">Analyzing...</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-memory"></i> RAM Usage:
+                        <span id="ram-status" class="status-value">Analyzing...</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-plug"></i> Battery Drain:
+                        <span id="battery-status" class="status-value">Analyzing...</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-thermometer-half"></i> CPU Temp:
+                        <span id="cpu-status" class="status-value">Analyzing...</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="options">
+                <button class="main-button" data-type="junk"><i class="fas fa-broom"></i> Clean Junk</button>
+                <button class="main-button" data-type="ram"><i class="fas fa-rocket"></i> Boost RAM</button>
+                <button class="main-button" data-type="battery"><i class="fas fa-battery-full"></i> Save Battery</button>
+                <button class="main-button" data-type="cpu"><i class="fas fa-fan"></i> Cool Down CPU</button>
+            </div>
+        </div>
+
+        <!-- ক্লিনিং অ্যানিমেশন স্ক্রিন -->
+        <div id="cleaning-view" class="hidden">
+            <!-- প্রতিটি কাজের জন্য আলাদা অ্যানিমেশন আইকন -->
+            <div id="junk-animation" class="animation-icon hidden"><i class="fas fa-broom"></i></div>
+            <div id="ram-animation" class="animation-icon hidden"><i class="fas fa-rocket"></i></div>
+            <div id="battery-animation" class="animation-icon hidden"><i class="fas fa-battery-three-quarters"></i></div>
+            <div id="cpu-animation" class="animation-icon hidden"><i class="fas fa-fan"></i></div>
+
+            <p id="cleaning-status">Optimizing System...</p>
+            <div class="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+            <div class="scan-log-container">
+                <pre id="scan-log"></pre>
+            </div>
+        </div>
+
+        <!-- ফলাফল দেখানোর স্ক্রিন -->
+        <div id="result-view" class="hidden">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h2 id="result-title">System Optimized!</h2>
+            <!-- সাধারণ ফলাফলের জন্য -->
+            <p id="result-stats"></p>
+            <!-- জাঙ্ক ক্লিনের বিস্তারিত রিপোর্টের জন্য -->
+            <div id="junk-report-details" class="hidden"></div>
+
+            <button class="back-button">Done</button>
+        </div>
+
+        <!-- অলরেডি ক্লিনড স্ক্রিন -->
+        <div id="already-clean-view" class="hidden">
+            <i class="fas fa-shield-alt shield-icon"></i>
+            <h2 id="already-clean-title">Already Optimized</h2>
+            <p id="already-clean-message">This section is already optimized.</p>
+            <button class="back-button">Back</button>
+        </div>
+    </div>
+
+    <footer id="credit-footer">
+      <span>Create by Devil-X</span>
+      <div class="social-icons">
+          <!-- ফেসবুক লিংক -->
+          <a href="https://www.facebook.com/AnonymousCyberTeamOfficial" target="_blank" aria-label="Facebook Profile" title="Facebook">
+              <i class="fab fa-facebook"></i>
+          </a>
+
+          <!-- টেলিগ্রাম লিংক -->
+          <a href="https://t.me/shamim_vaiya" target="_blank" aria-label="Telegram Profile" title="Telegram">
+              <i class="fab fa-telegram"></i>
+          </a>
+
+          <!-- হোয়াটসঅ্যাপ লিংক -->
+          <a href="https://wa.me/+8801540580575" target="_blank" aria-label="WhatsApp Chat" title="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+          </a>
+      </div>
+  </footer>
+
+    <!-- সাউন্ড ইফেক্ট -->
+    <audio id="scan-sound" src="scan.mp3" preload="auto"></audio>
+    <audio id="complete-sound" src="complete.mp3" preload="auto"></audio>
+    <!-- আপনি চাইলে ভিন্ন কাজের জন্য ভিন্ন সাউন্ড যোগ করতে পারেন -->
+    <!-- <audio id="boost-sound" src="boost.mp3" preload="auto"></audio> -->
+
+    <script src="script.js"></script>
+</body>
+</html>
